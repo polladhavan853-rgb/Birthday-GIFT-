@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, My Kunju! 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #ffe0ec, #fff0f5, #ffd1dc);
+    color: #8b3456;
+    text-align: center;
+}
+
+/* Background hearts */
+.heart {
+    position: fixed;
+    bottom: -50px;
+    font-size: 22px;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% { opacity: 0.6; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Main section */
+.container {
+    min-height: 100vh;
+    padding: 65px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.tag {
+    background: rgba(255,255,255,0.65);
+    padding: 9px 22px;
+    border-radius: 30px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(55px, 12vw, 95px);
+    color: #d94f83;
+    line-height: 1.2;
+    text-shadow: 2px 3px 10px #ffffff;
+}
+
+.subtitle {
+    font-size: 15px;
+    margin-top: 15px;
+    color: #98516c;
+    line-height: 1.8;
+}
+
+.cake {
+    font-size: 95px;
+    margin: 25px 0;
+    animation: bounce 2s infinite;
+    filter: drop-shadow(0 8px 8px #e9a0ba);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 48px;
+    color: #c83d76;
+    margin: 8px 0 25px;
+}
+
+.surprise-btn {
+    background: linear-gradient(135deg, #e84f8b, #ba3974);
+    color: white;
+    border: none;
+    padding: 16px 35px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(190, 55, 110, 0.3);
+    transition: 0.3s;
+}
+
+.surprise-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 10px 30px rgba(190, 55, 110, 0.5);
+}
+
+.footer {
+    margin-top: 35px;
+    font-size: 13px;
+    color: #a55c79;
+}
+
+/* Popup */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(76, 25, 49, 0.55);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+    z-index: 10;
+    backdrop-filter: blur(6px);
+}
+
+.overlay.show {
+    display: flex;
+    animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.popup {
+    background: #fff8fb;
+    width: 100%;
+    max-width: 530px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 35px 28px;
+    border-radius: 25px;
+    position: relative;
+    box-shadow: 0 15px 60px rgba(0,0,0,0.2);
+    animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.popup h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 43px;
+    color: #d94f83;
+    margin-bottom: 20px;
+}
+
+.message {
+    font-size: 14px;
+    line-height: 2;
+    color: #754057;
+    text-align: left;
+    white-space: normal;
+}
+
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 17px;
+    border: none;
+    background: none;
+    color: #c64b7a;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.popup-heart {
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+/* Confetti canvas */
+#confetti {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+}
+
+@media(max-width: 480px) {
+    .container { padding: 45px 18px; }
+    .cake { font-size: 75px; }
+    .name { font-size: 40px; }
+    .popup { padding: 35px 22px; }
+    .popup h2 { font-size: 36px; }
+    .message { font-size: 13px; line-height: 1.9; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+
+    <div class="tag">✨ A SPECIAL DAY FOR SOMEONE SPECIAL ✨</div>
+
+    <h1>Happy Birthday!</h1>
+
+    <p class="subtitle">
+        Today is all about celebrating the most<br>
+        beautiful soul in my little universe.
+    </p>
+
+    <div class="cake">🎂</div>
+
+    <div class="name">My Sweet Kunju 💗</div>
+
+    <button class="surprise-btn" onclick="openSurprise()">
+        💌 Click for a Surprise
+    </button>
+
+    <div class="footer">
+        Made with all the love in my heart ♡
+    </div>
+
+</div>
+
+<!-- Surprise popup -->
+<div class="overlay" id="overlay" onclick="closeOutside(event)">
+    <div class="popup">
+
+        <button class="close-btn" onclick="closeSurprise()">×</button>
+
+        <h2>To My Favourite Person 💗</h2>
+
+        <div class="message">
+            Happy birthday to the one who is making me realize
+            myself and exposing me to what love means.
+
+            Thank you for making me able to process love,
+            understand love because you are my love in its
+            purest form.
+
+            I would give you a million hugs if you were here.
+            So instead I'm writing you this.
+
+            I promise I will try to live up to the love we
+            have for us.
+
+            Happiesttttt birthday my sweet kunjus.
+
+            Thank god to your parents who decided to do it
+            that one day.
+
+            Woof youuuuuu... 🐶💗
+        </div>
+
+        <div class="popup-heart">💗 🧸 💗</div>
+
+    </div>
+</div>
+
+<script>
+
+// Floating hearts
+const hearts = ['💗', '💕', '♡', '💖', '🌸'];
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 10000);
+}
+
+setInterval(createHeart, 700);
+
+
+// Surprise popup
+function openSurprise() {
+    document.getElementById('overlay').classList.add('show');
+    launchConfetti();
+}
+
+function closeSurprise() {
+    document.getElementById('overlay').classList.remove('show');
+}
+
+function closeOutside(event) {
+    if (event.target.id === 'overlay') {
+        closeSurprise();
+    }
+}
+
+
+// Confetti animation
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+let animationId;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function launchConfetti() {
+    particles = [];
+
+    const colors = [
+        '#ff4f91',
+        '#ffb6c1',
+        '#ffd700',
+        '#ffffff',
+        '#c77dff',
+        '#ff85a1'
+    ];
+
+    for (let i = 0; i < 180; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: -Math.random() * canvas.height,
+            size: Math.random() * 8 + 4,
+            speed: Math.random() * 4 + 2,
+            angle: Math.random() * 360,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            spin: Math.random() * 0.15 - 0.075
+        });
+    }
+
+    cancelAnimationFrame(animationId);
+    animateConfetti();
+}
+
+function animateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, index) => {
+        p.y += p.speed;
+        p.x += Math.sin(p.angle) * 2;
+        p.angle += p.spin;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+        ctx.restore();
+
+        if (p.y > canvas.height + 20) {
+            particles.splice(index, 1);
+        }
+    });
+
+    if (particles.length > 0) {
+        animationId = requestAnimationFrame(animateConfetti);
+    } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
+</script>
+
+</body>
+</html>
